@@ -2,13 +2,6 @@ import java.util.ArrayList;
 
 public class ArrayAndArrayListOfObjectsExample {
 
-	/*
-	 * Example of an inner class
-	 */
-	public class GeometricObject {
-		int height;
-	}
-
 	public static void main(String[] args) {
 		/*
 		 * arrays provide default values depending on the type.
