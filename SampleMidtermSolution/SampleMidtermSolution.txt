@@ -1,0 +1,154 @@
+
+1) A static method belongs to the class and is shared by all instance of the class, while an instance method belongs to instances of the classes. Instance methods can access instance fields while static methods cannot.
+
+Example of Static mehtod:
+
+	Math.abs(-20);
+
+An instance method will require an object to be instantiated before calling:
+
+	Scanner scanner = new Scanner(System.in);
+	int input = scanner.nextInt();
+
+2.1) Always pass by value.
+
+2.2) 
+
+For primative types, a copy of the orginal value is passed, and the original variable will not be affected by the method. 
+
+For reference types, a copy of the memory address is passed to the method, you can change the state of the reference variable, but you cannot reassign it to another variable.
+
+Example:
+
+-Primitive type:
+    int x = 20;
+    testPrimitive(x);
+    public static void testPrimitive(int x){
+        //This will not change the value of the original "x" variable, because only a copy of the value is passed in
+	x = 20;
+     }
+
+-Reference Type:
+   Dog dog = new Dog();
+   changeDog(dog);
+   public static void changeDog(Dog dog){
+     //This might change the orignal "dog" if the method changes the fields     
+     dog.setName("Mike");
+     //This will NOT reassign the original "dog" to a new dog, because only a copy of the memory address is passed
+     dog = new Dog();
+    }
+
+
+3) Variables: lower camel case, myVariable
+   Constants: all caps, words seperated by underscore, MAX_VALUE
+   Methods = lower camel case, nextInt(), parseInt(),
+   Classes = upper camel case, ClassSchedule, Scanner
+
+
+4) Same as q1
+
+
+5.1) public class Student{
+
+     String name;
+     public Student() {
+        this.name = "Mike";
+     }	
+     // Arg constructor
+     public Student(String name) {
+	this.name = name;
+     }
+
+}
+	 
+	 
+5.2) Student studentOne = new Student();
+     Student studentTwo = new Student("John Wick");
+	 
+6) Interfaces allows you to specify what methods needs to be implemented while hiding the implementations of others.
+   Default methods allow you to add new functionality without breaking code that implements the existing interface, since if they don't implement the default method, the default implementation is used.
+
+7) Java does not support multiple inheritence. Implement multiple interfaces.
+
+8) Subclasses DO NOT inherit constructors from parent classes.
+	
+        public class GenericStudent{
+	    int CIN;
+	    //Because a non-defualt constuctor is specified, Java will not provide a default no-arg constructor
+            public GenericStudent(int CIN){
+		this.CIN = CIN;
+            }
+
+        }
+ 
+        public class GraduateStudent extends GenericStudent{
+
+		public GraduateStudent(int CIN){
+		   //Must call parent constructor. The subclass constuctor calls super() (the parent default no-arg constuctor) by default. But since the parent class doesn't have a default constructor anymore, you have to call it explicitly, otherwise it won't compile.	
+		   super(CIN);
+
+		}
+	}
+
+9)  public abstract class GeometricShape {
+	
+		String name;
+		String color;
+		
+		public GeometricShape(String name, String color) {
+			this.name = name;
+			this.color = color;
+		}
+		
+		public abstract double calculateArea();
+	}
+	
+	public class Rectangle extends GeometricShape {
+		
+		int width;
+		int height;
+		
+		public Rectangle(String name, String color, double width, double height) {
+			super(name, color);
+			this.width = width;
+			this.height = height;
+		}
+		
+		@Override
+		public double calculateArea() {
+			return this.width * this.height;
+		}	
+	}
+		
+	public class Triangle extends GeometricShape {
+			
+		int base;
+		int height;
+		
+		public Triangle(String name, String color, double base, double height) {
+			super(name, color);
+			this.base = base;
+			this.height = height;
+		}
+		
+		@Override
+		public double calculateArea() {
+			return 0.5 * this.base * this.height;
+		}	
+	}
+	
+	public class Runner {
+	
+		public static void main(String[] args) {
+		
+			ArrayList<GeometricShape> shapesList = new GeometricShape<>();
+			
+			shapes.add(new Rectangle("Rectangle", "Blue", 2.5, 5.0));
+			shapes.add(new Triangle("Triangle", "Red", 6.9, 13.37));
+			
+			for (GeometricShape shape : shapesList) {
+				System.out.println("The area of " + shape.name + " is " + shape.calculateArea + ".");
+			}
+		}
+	}
+	
